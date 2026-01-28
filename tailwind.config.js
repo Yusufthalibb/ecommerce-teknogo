@@ -12,10 +12,13 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter Tight', 'sans-serif'],
             },
         },
     },
 
-    plugins: [forms],
+    plugins: [forms,
+        require('@tailwindcss/forms'),
+  require('daisyui'),
+    ],
 };

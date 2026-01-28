@@ -1,0 +1,1 @@
+<!-- products/show.blade.php -->

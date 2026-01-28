@@ -1,0 +1,1 @@
+<!-- wishlist/index.blade.php -->

@@ -1,0 +1,1 @@
+<!-- reports/sales.blade.php -->

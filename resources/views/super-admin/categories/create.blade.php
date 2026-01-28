@@ -1,0 +1,1 @@
+<!-- categories/create.blade.php -->

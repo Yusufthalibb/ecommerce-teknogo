@@ -63,44 +63,39 @@ class ProductController extends Controller
      * Store new product
      */
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'name' => 'required|string|max:255|unique:products,name',
-            'description' => 'nullable|string',
-            'specifications' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'brand' => 'nullable|string|max:100',
-            'sku' => 'nullable|string|unique:products,sku',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'is_active' => 'boolean',
-            'is_featured' => 'boolean',
-        ]);
+{
+    $validated = $request->validate([
+        'category_id' => 'required|exists:categories,id',
+        'name' => 'required|string|max:255|unique:products,name',
+        'description' => 'nullable|string',
+        'specifications' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'brand' => 'nullable|string|max:100',
+        'sku' => 'nullable|string|unique:products,sku',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'is_active' => 'boolean',
+        'is_featured' => 'boolean',
+    ]);
 
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('products', 'public');
-        }
-
-        // Auto generate slug
-        $validated['slug'] = Str::slug($validated['name']);
-
-        // Auto generate SKU if not provided
-        if (empty($validated['sku'])) {
-            $validated['sku'] = 'PRD-' . strtoupper(Str::random(8));
-        }
-
-        // Convert specifications to JSON if needed
-        if (isset($validated['specifications'])) {
-            $validated['specifications'] = $validated['specifications'];
-        }
-
-        Product::create($validated);
-
-        return redirect()->route('admin.products.index')
-            ->with('success', 'Produk berhasil ditambahkan');
+    if ($request->hasFile('image')) {
+        $validated['image'] = $request->file('image')->store('products', 'public');
     }
+
+    $validated['slug'] = Str::slug($validated['name']);
+
+    if (empty($validated['sku'])) {
+        $validated['sku'] = 'PRD-' . strtoupper(Str::random(8));
+    }
+
+    $validated['is_active'] = $request->boolean('is_active');
+    $validated['is_featured'] = $request->boolean('is_featured');
+
+    Product::create($validated);
+
+    return redirect()->route('admin.products.index')
+        ->with('success', 'Produk berhasil ditambahkan');
+}
 
     /**
      * Show product detail

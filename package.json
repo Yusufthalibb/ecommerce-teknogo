@@ -6,10 +6,10 @@
         "build": "vite build && vite build --ssr"
     },
     "devDependencies": {
-        "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/forms": "^0.5.11",
         "@tailwindcss/typography": "^0.5.2",
         "@vitejs/plugin-vue": "^4.0.0",
-        "alpinejs": "^3.4.2",
+        "alpinejs": "^3.15.5",
         "autoprefixer": "^10.4.2",
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.5",
@@ -19,6 +19,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "chart.js": "^4.5.1",
         "daisyui": "^3.1.1"
     }
 }
